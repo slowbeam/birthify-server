@@ -1,5 +1,10 @@
 class Api::V1::UsersController < ApplicationController
 
+  def index
+    @users = User.all
+    render json: @users
+  end
+
 
   def create
     if params[:error]
@@ -26,10 +31,10 @@ class Api::V1::UsersController < ApplicationController
 
       user_params = JSON.parse(user_response.body)
 
-      @user = User.find_or_create_by(username: user_params[:id],
+      @user = User.find_or_create_by(username: user_params["id"],
                           spotify_url: user_params["external_urls"]["spotify"],
                           href: user_params["href"],
-                          uri: user_params[:uri])
+                          uri: user_params["uri"])
       @user.update(access_token: auth_params["access_token"], refresh_token: auth_params["refresh_token"])
 
       redirect_to "http://localhost:3001/success"
