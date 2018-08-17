@@ -25,7 +25,7 @@ class Api::V1::SpotifyController < ApplicationController
     search_data = JSON.parse(search_get_response.body)
 
     search_data["tracks"]["items"].each do |track|
-      currentSong = Song.find_or_create_by(artist: track["artists"][0]["name"], title: track["name"], release_date: track["album"]["release_date"])
+      currentSong = Song.find_or_create_by(artist: track["artists"][0]["name"], title: track["name"], release_date: track["album"]["release_date"], cover: track["album"]["images"][1]["url"])
       SongUser.find_or_create_by(user_id: current_user.id, song_id: currentSong.id)
     end
 
