@@ -17,7 +17,7 @@ class Api::V1::GenresController < ApplicationController
     genres = JSON.parse(genre_get_response.body)
 
     genres["genres"].each do |genre_name|
-      Genre.create(name: genre_name)
+      Genre.find_or_create_by(name: genre_name)
     end
 
     redirect_to "http://localhost:3001/"

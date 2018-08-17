@@ -14,4 +14,5 @@ class Api::V1::LoginController < ApplicationController
 
     redirect_to "#{url}?#{query_params.to_query}"
   end
+  
 end

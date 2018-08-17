@@ -7,10 +7,14 @@ Rails.application.routes.draw do
       resources :users, only: [:index]
       resources :artists, only: [:index, :show]
       resources :genres, only: [:index]
+      resources :song_users, only: [:index]
       get 'logging-in', :to => 'users#create'
       get 'load-genre-seeds', :to => 'genres#create'
+      get 'search', :to => 'spotify#search'
     end
   end
+
+
 
 
 end
