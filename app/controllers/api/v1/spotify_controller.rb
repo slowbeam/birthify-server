@@ -1,9 +1,11 @@
 class Api::V1::SpotifyController < ApplicationController
   before_action :refresh_token, only: [:search]
 
-  @@current_user = User.find(ENV["CURRENT_USER_ID"].to_i)
+
 
   def search
+
+    @@current_user = User.find(ENV["CURRENT_USER_ID"].to_i)
 
     search_year = search_params["year"]
 
@@ -39,7 +41,9 @@ class Api::V1::SpotifyController < ApplicationController
   end
 
   def refresh_token
-  
+
+    @@current_user = User.find(ENV["CURRENT_USER_ID"].to_i)
+
     if @@current_user.access_token_expired?
     #Request a new access token using refresh token
     #Create body of request

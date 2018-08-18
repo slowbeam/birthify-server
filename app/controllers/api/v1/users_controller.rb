@@ -43,7 +43,7 @@ class Api::V1::UsersController < ApplicationController
 
       ENV["CURRENT_USER_ID"] = @user.id.to_s
 
-      redirect_to "http://localhost:3001/success"
+      redirect_to "http://localhost:3001/"
 
     end
 
