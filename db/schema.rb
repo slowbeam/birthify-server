@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_17_182615) do
+ActiveRecord::Schema.define(version: 2018_08_18_174125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 2018_08_17_182615) do
     t.string "uri"
     t.string "access_token"
     t.string "refresh_token"
+    t.string "birth_year"
+    t.boolean "logged_in"
   end
 
   add_foreign_key "song_users", "songs"

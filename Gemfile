@@ -51,3 +51,5 @@ gem 'rest-client'
 gem 'rspotify'
 
 gem 'pry'
+
+gem 'figaro'

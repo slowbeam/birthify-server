@@ -1,21 +1,24 @@
 class Api::V1::SpotifyController < ApplicationController
+  before_action :refresh_token, only: [:search]
+
+  @@current_user = User.find(ENV["CURRENT_USER_ID"].to_i)
 
   def search
 
     search_year = search_params["year"]
 
-    current_user = User.find(1)
+    User.update(@@current_user["id"], birth_year: search_year)
 
     url = 'https://api.spotify.com/v1/search'
 
     header = {
-      Authorization: "Bearer #{current_user["access_token"]}"
+      Authorization: "Bearer #{@@current_user["access_token"]}"
     }
 
     query_params = {
       q: 'year:' + search_year,
       type: 'track',
-      limit: 50
+      limit: 30
     }
 
     fetchUrl = "#{url}?#{query_params.to_query}"
@@ -26,7 +29,7 @@ class Api::V1::SpotifyController < ApplicationController
 
     search_data["tracks"]["items"].each do |track|
       currentSong = Song.find_or_create_by(artist: track["artists"][0]["name"], title: track["name"], release_date: track["album"]["release_date"], cover: track["album"]["images"][1]["url"])
-      SongUser.find_or_create_by(user_id: current_user.id, song_id: currentSong.id)
+      SongUser.find_or_create_by(user_id: @@current_user.id, song_id: currentSong.id)
     end
 
 
@@ -35,12 +38,9 @@ class Api::V1::SpotifyController < ApplicationController
 
   end
 
-  def self.refresh_token
-    #TODO DELETE BELOW LINE SO WE ALWAYS DEAL WITH THE CURRENT USER
-    current_user = User.find(1)
-
-    #Check if user's access token has expired
-    if current_user.access_token_expired?
+  def refresh_token
+  
+    if @@current_user.access_token_expired?
     #Request a new access token using refresh token
     #Create body of request
     body = {

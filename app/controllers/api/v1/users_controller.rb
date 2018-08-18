@@ -37,6 +37,12 @@ class Api::V1::UsersController < ApplicationController
                           uri: user_params["uri"])
       @user.update(access_token: auth_params["access_token"], refresh_token: auth_params["refresh_token"])
 
+      User.update_all(logged_in: false)
+
+      @user.update(logged_in: true)
+
+      ENV["CURRENT_USER_ID"] = @user.id.to_s
+
       redirect_to "http://localhost:3001/success"
 
     end
