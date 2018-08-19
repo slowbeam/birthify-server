@@ -1,7 +1,24 @@
 class Api::V1::SpotifyController < ApplicationController
-  before_action :refresh_token, only: [:search]
+  before_action :refresh_token, only: [:search, :create_playlist]
 
+  def create_playlist
+    @@current_user = User.find(ENV["CURRENT_USER_ID"].to_i)
 
+    url = "https://api.spotify.com/v1/users/#{ENV["CURRENT_USER_ID"].to_i}/playlists"
+
+    header = {
+      Authorization: "Bearer #{@@current_user["access_token"]}",
+      "Content-Type": "application/json"
+    }
+
+    body = {
+      name: "My Birthify Playlist",
+      description: "A playlist of songs that came out the year I was born"
+    }
+
+    create_playlist_response = RestClient.post(url, body, header)
+
+  end
 
   def search
 
@@ -49,7 +66,7 @@ class Api::V1::SpotifyController < ApplicationController
     #Create body of request
     body = {
       grant_type: "refresh_token",
-      refresh_token: current_user.refresh_token,
+      refresh_token: @@current_user.refresh_token,
       client_id: 'c4b56144ef3d453581292c34d556ce35',
       client_secret: 'e486d8b9155149b1a8cae370b5091849'
     }
@@ -57,7 +74,7 @@ class Api::V1::SpotifyController < ApplicationController
     auth_response = RestClient.post('https://accounts.spotify.com/api/token', body)
 
     auth_params = JSON.parse(auth_response)
-    current_user.update(access_token: auth_params["access_token"])
+    @@current_user.update(access_token: auth_params["access_token"])
     else
       puts "Current user's access token has not expired"
     end

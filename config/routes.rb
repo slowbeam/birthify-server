@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'logging-in', :to => 'users#create'
       get 'load-genre-seeds', :to => 'genres#create'
       get 'search', :to => 'spotify#search'
+      get 'create-playlist', :to => 'spotify#create_playlist'
     end
   end
 
