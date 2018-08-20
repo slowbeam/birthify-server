@@ -12,11 +12,8 @@ Rails.application.routes.draw do
       get 'load-genre-seeds', :to => 'genres#create'
       get 'search', :to => 'spotify#search'
       get 'create-playlist', :to => 'spotify#create_playlist'
-      get 'add_songs_to_playlist', :to => 'spotify#add_songs_to_playlist'
+      get 'load-playlist', :to => 'spotify#load_playlist'
     end
   end
-
-
-
 
 end
