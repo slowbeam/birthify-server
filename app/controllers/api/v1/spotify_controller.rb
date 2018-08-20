@@ -21,6 +21,25 @@ class Api::V1::SpotifyController < ApplicationController
 
     create_playlist_response = RestClient.post(url, body.to_json, header)
 
+    playlist_data = JSON.parse(create_playlist_response.body)
+
+    ENV["PLAYLIST_ID"] = playlist_data["id"]
+
+  end
+
+  def add_songs_to_playlist
+
+  @@current_user = User.find(ENV["CURRENT_USER_ID"].to_i)
+
+  url = "https://api.spotify.com/v1/playlists/#{ENV["PLAYLIST_ID"]}/tracks"
+
+  header = {
+    Authorization: "Bearer #{@@current_user["access_token"]}",
+    "Content-Type": "application/json"
+  }
+
+
+
   end
 
   def search
@@ -50,7 +69,8 @@ class Api::V1::SpotifyController < ApplicationController
     search_data = JSON.parse(search_get_response.body)
 
     search_data["tracks"]["items"].each do |track|
-      currentSong = Song.find_or_create_by(artist: track["artists"][0]["name"], title: track["name"], release_date: track["album"]["release_date"], cover: track["album"]["images"][1]["url"])
+
+      currentSong = Song.find_or_create_by(artist: track["artists"][0]["name"], title: track["name"], release_date: track["album"]["release_date"], cover: track["album"]["images"][1]["url"], spotify_id: track["id"], uri: track["uri"])
       SongUser.find_or_create_by(user_id: @@current_user.id, song_id: currentSong.id)
     end
 
