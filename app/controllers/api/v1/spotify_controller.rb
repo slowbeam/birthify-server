@@ -43,7 +43,7 @@ class Api::V1::SpotifyController < ApplicationController
       SongUser.find_or_create_by(user_id: @@current_user.id, song_id: currentSong.id)
     end
 
-    redirect_to "http://localhost:3001/"
+    redirect_to "http://localhost:3001/playlist"
 
 
   end
@@ -88,7 +88,7 @@ class Api::V1::SpotifyController < ApplicationController
 
     playlist_data = JSON.parse(add_songs_to_playlist_response.body)
 
-    redirect_to "http://localhost:3001/"
+    redirect_to "http://localhost:3001/playlist"
 
   end
 
