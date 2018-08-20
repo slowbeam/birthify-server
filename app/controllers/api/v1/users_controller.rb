@@ -43,6 +43,8 @@ class Api::V1::UsersController < ApplicationController
 
       ENV["CURRENT_USER_ID"] = @user.id.to_s
 
+      ENV["SPOTIFY_USER_ID"] = @user.username
+
       redirect_to "http://localhost:3001/"
 
     end

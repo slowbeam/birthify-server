@@ -4,7 +4,10 @@ class Api::V1::SpotifyController < ApplicationController
   def create_playlist
     @@current_user = User.find(ENV["CURRENT_USER_ID"].to_i)
 
-    url = "https://api.spotify.com/v1/users/#{ENV["CURRENT_USER_ID"].to_i}/playlists"
+    @@spotify_user_id = ENV["SPOTIFY_USER_ID"]
+
+    url = "https://api.spotify.com/v1/users/#{@@spotify_user_id}/playlists"
+
 
     header = {
       Authorization: "Bearer #{@@current_user["access_token"]}",
@@ -16,7 +19,7 @@ class Api::V1::SpotifyController < ApplicationController
       description: "A playlist of songs that came out the year I was born"
     }
 
-    create_playlist_response = RestClient.post(url, body, header)
+    create_playlist_response = RestClient.post(url, body.to_json, header)
 
   end
 
