@@ -45,10 +45,20 @@ class Api::V1::UsersController < ApplicationController
 
       ENV["SPOTIFY_USER_ID"] = @user.username
 
-      redirect_to "http://localhost:3001/welcome"
+      if @user["birth_year"] === nil
+        redirect_to "http://localhost:3001/welcome"
+      else
+        redirect_to "http://localhost:3001/playlist"
+      end
 
     end
-
   end
+
+  def logout
+    User.update_all(logged_in: false)
+
+    redirect_to "http://localhost:3001/login"
+  end
+
 
 end
