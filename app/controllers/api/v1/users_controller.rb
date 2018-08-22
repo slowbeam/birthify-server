@@ -10,7 +10,7 @@ class Api::V1::UsersController < ApplicationController
     if params[:error]
 
       puts 'LOGIN ERROR', params
-      redirect_to "http://localhost:3001/login/failure"
+      redirect_to "http://localhost:3001/"
     else
       body = {
         grant_type: "authorization_code",
