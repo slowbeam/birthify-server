@@ -57,7 +57,7 @@ class Api::V1::UsersController < ApplicationController
   def logout
     User.update_all(logged_in: false)
 
-    redirect_to "http://localhost:3001/login"
+    redirect_to "http://localhost:3001/"
   end
 
 
