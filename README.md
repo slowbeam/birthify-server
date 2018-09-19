@@ -28,6 +28,10 @@ Birthify can save the playlist to the user's Spotify account:
 
 ![birthify demo 3](https://github.com/slowbeam/birthify-client/blob/master/public/demos/birthify-demo-3.gif)
 
+Full app demo available here: 
+
+https://www.youtube.com/watch?v=OsuEvbesbe4
+
 
 ## Development setup
 
