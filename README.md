@@ -9,8 +9,6 @@ Front end Javascript & React app repo available here: https://github.com/slowbea
 
 ![birthify demo 1](https://media.giphy.com/media/3GBXTvAcRPAgv03GDl/giphy.gif)
 
-![test](https://media.giphy.com/media/2YgwBt6skgicca4tI4/giphy.gif)
-
 ## Installation
 
 OS X & Linux:
@@ -22,6 +20,8 @@ bundle install
 ## Usage example
 
 Birthify can create a playlist of songs that came out in the user's birth year:
+
+![birthify demo 2](https://media.giphy.com/media/MuE7qasFr4X1aTAgod/giphy.gif)
 
 
 Birthify can save the playlist to the user's Spotify account:
