@@ -21,7 +21,7 @@ bundle install
 
 Birthify can create a playlist of songs that came out in the user's birth year:
 
-[demo](https://media.giphy.com/media/MuE7qasFr4X1aTAgod/giphy.gif)
+![demo](https://media.giphy.com/media/MuE7qasFr4X1aTAgod/giphy.gif)
 
 
 Birthify can save the playlist to the user's Spotify account:
